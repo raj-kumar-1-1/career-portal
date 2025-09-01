@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Hiring</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f7;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .job-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+      padding: 0 10px;
+    }
+
+    .job-card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-left: 5px solid #3498db;
+    }
+
+    .job-card h2 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      color: #2c3e50;
+    }
+
+    .job-card p {
+      margin: 5px 0;
+      color: #555;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <div>
+      <h1>Jobs posted by you</h1>
+      <div id="jobsList" class="job-container">
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const employerName = localStorage.getItem("employerName");
+    const jobsListDiv = document.getElementById("jobsList");
+
+    async function loadJobs() {
+      try {
+        const response = await fetch("https://687a1c32abb83744b7eb78a6.mockapi.io/jobs");
+        const jobs = await response.json();
+
+        const employerJobs = jobs.filter(job => job.company_name === employerName);
+
+        if (employerJobs.length === 0) {
+          jobsListDiv.innerHTML = "<p style='text-align:center;'>No jobs posted by you yet.</p>";
+          return;
+        }
+        employerJobs.forEach(job => {
+          const jobCard = document.createElement("div");
+          jobCard.className = "job-card";
+          jobCard.innerHTML = `
+            <h2>${job.jobtitle}</h2>
+            <p><strong>Type:</strong> ${job.employmentType}</p>
+            <p><strong>Role:</strong> ${job.role}</p>
+            <p><strong>Location:</strong> ${job.job_location}</p>
+            <p><strong>Mode:</strong> ${job.work_mode}</p>
+            <p><strong>Description:</strong> ${job.job_description}</p>
+          `;
+          jobsListDiv.appendChild(jobCard);
+        });
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+        jobsListDiv.innerHTML = "<p style='color:red;text-align:center;'>Failed to load jobs. Try again later.</p>";
+      }
+    }
+
+    loadJobs();
+  </script>
+</body>
+</html>

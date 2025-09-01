@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Post a Job</title>
+  <link rel="stylesheet" href="../styling/post-job.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: #333;
+    }
+
+    form {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      border:none;
+    }
+
+    .inputs,
+    input[type="text"],
+    select,
+    textarea {
+      padding: 0.8rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      padding: 0.8rem 2rem;
+      background-color: #102235;
+      color: white;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      width: fit-content;
+      align-self: center;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    section  form   div {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    section > form > div > div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .checkbox-group {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+    }
+
+    .checkbox-group label {
+      font-weight: normal;
+      font-size: 1rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      section > form > div {
+        flex-direction: column;
+      }
+
+      .inputs,
+      input[type="text"],
+      select {
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 style=" font-size: 5em;
+    text-align: center;
+        /* border:2px solid black; */
+        margin-top: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        width:40rem;
+        color: rgb(61, 195, 252);
+        text-shadow: 1px 1px 1px #3a54d5;
+
+
+">Post a Job</h1>
+  <section>
+    <form>
+      <div>
+        <div>
+          <label>Job title / Designation</label>
+          <input
+            type="text"
+            class="inputs"
+            id="jobTitle"
+            placeholder="Enter a clear & specific title to get better responses"
+          />
+        </div>
+        <div>
+          <label>Employment type</label>
+          <select required>
+            <option value="fulltime">Full Time</option>
+            <option value="parttime">Part Time</option>
+            <option value="Internship">Internship</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Key skills</label>
+      <input
+        type="text"
+        class="inputs"
+        placeholder="Add skills that are crucial for the job"
+        required
+      />
+
+      <label>Department & Role category</label>
+      <select required>
+        <option value="">Search & select the best matching option</option>
+        <option value="IT">IT</option>
+        <option value="Finance">Finance</option>
+      </select>
+
+      <label>Work mode</label>
+      <label style="font-weight: lighter; color:gray">Select where the candidate will be working from</label>
+      <select required>
+        <option value="office">In office</option>
+        <option value="remote">Remote</option>
+        <option value="hybrid">hybrid</option>
+      </select>
+
+      <label>Job location (maximum 3)</label>
+      <input
+        type="text"
+        class="inputs"
+        placeholder="Search and add locations"
+        required
+      />
+
+      <label>Candidate industry</label>
+      <select>
+        <option value="">Select the industry you're looking to hire from</option>
+        <option value="IT">IT</option>
+        <option value="Finance">Finance</option>
+      </select>
+
+      <label>Diversity hiring</label>
+      <div class="checkbox-group">
+        <input type="checkbox" />
+        <label style="margin-left:0;">
+          Hire women candidates for this role and promote diversity in workplace
+        </label>
+      </div>
+
+      <label>Job description</label>
+      <textarea placeholder="enter the description"></textarea>
+
+      <label>Company name</label>
+      <input type="text" />
+
+      <label>About company</label>
+      <input type="text" class="inputs" />
+
+      <button>Post Job</button>
+    </form>
+  </section>
+</body>
+<script>
+  document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault(); 
+    var jobTitle = document.getElementById("jobTitle").value;
+    var employmentType = document.querySelector("select").value;
+    var keySkills = document.querySelector('input[placeholder="Add skills that are crucial for the job"]').value;
+    var role = document.querySelectorAll("select")[1].value;
+    var workMode = document.querySelectorAll("select")[2].value;
+    var jobLocation = document.querySelector('input[placeholder="Search and add locations"]').value;
+    var candidateIndustry = document.querySelectorAll("select")[3].value;
+    var jobDescription = document.querySelector("textarea").value;
+    var companyName = document.querySelectorAll("input")[3].value;
+    var aboutCompany = document.querySelectorAll("input")[4].value;
+    var jobData = {
+      jobtitle: jobTitle,
+      employmentType: employmentType,
+      key_skills: keySkills.split(",").map(function(skill) {
+        return skill.trim();
+      }), 
+      role: role,
+      work_mode: workMode,
+      job_location: jobLocation,
+      candidate_industry: candidateIndustry,
+      job_description: jobDescription,
+      company_name: companyName,
+      about_company: aboutCompany
+    };
+
+    fetch("https://687a1c32abb83744b7eb78a6.mockapi.io/jobs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(jobData)
+    })
+    .then(function(response) {
+      if (response.ok) {
+        alert("Job posted successfully!");
+        document.querySelector("form").reset();
+      } else {
+        alert("Failed to post the job. Please try again.");
+      }
+    })
+    .catch(function(error) {
+      console.error("Error:", error);
+      alert("Something went wrong. Please try again later.");
+    });
+  });
+</script>
+
+</html>

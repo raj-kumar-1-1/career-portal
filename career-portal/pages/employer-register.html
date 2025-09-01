@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styling/register.css">
+</head>
+<body>
+    <div class="register">
+        <h1 style="font-size: 3rem; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Register to Post a Job</h1>
+        <div class="card">
+            <h1>Personal Details</h1>
+            <form class="personalDetails">
+                <br>
+                <label >Full Name</label>
+                <input type="text" class="inputs" required><br>
+                <label>Official Email Address</label>
+                <input type="email" class="inputs" required><br>
+                <label>Phone Number</label>
+                <input type="number" class="inputs" required><br>
+                <label>Password</label>
+                <input type="password" class="inputs" required><br> 
+                <label>Confirm Password</label>
+                <input type="password" class="inputs" required><br>
+            </form>
+        </div>
+
+        <div class="card">
+            <h1>Company Details</h1>
+            <form class="companyDetails">
+                <br>
+                <label>Company Name</label>
+                <input type="text" class="inputs" required><br>
+                <label>Company Website</label>
+                <input type="url" class="inputs" required> <br>
+                <label>Company Industry</label>
+                <select id="selectIndustry" class="selectIndustry">
+                    <option value="IT">IT</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Finance">Finance</option>
+                </select><br>
+                <label>Company Size</label>
+                 <select id="selectSize" class="selectSize">
+                    <option value="1-10">1-10</option>
+                    <option value="11-50">11-50</option>
+                    <option value="51-200">51-200</option>
+                </select><br>
+                <label>Company Address (optional)</label>
+                <input type="text" class="inputs" ><br> 
+            </form>
+        </div>
+
+        <div class="card">
+            <h1>Recruiter Role Info</h1>
+            <form class="roleInfo">
+                <br>
+                <label>Role</label>
+                 <select id="selectRole" class="selectRole">
+                    <option value="HR Manger">HR Manager</option>
+                    <option value="Talent-Acquisition-Lead">Talent Acquisition Lead</option>
+                </select><br>
+                <label>LinkedIn Profile (optional)</label>
+                <input type="url" class="inputs"> 
+                </form>
+        </div>
+        <button type="button" onclick="register()" style="background-color: rgb(47, 210, 47);" class="inputs">Submit</button>
+        <br>
+        </div>
+       <script>
+    async function register() {
+        let inputs = document.querySelectorAll('input');
+        let fullname = inputs[0].value;
+        let email = inputs[1].value;
+        let phone = inputs[2].value;
+        let password = inputs[3].value;
+        let confirmPassword = inputs[4].value;
+        let companyName = inputs[5].value;
+        let website = inputs[6].value;
+        let address = inputs[7].value;
+        let linkedin = inputs[8].value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        let industry = document.getElementById("selectIndustry").value;
+        let size = document.getElementById("selectSize").value;
+        let role = document.getElementById("selectRole").value;
+
+        const data = {
+            fullname,
+            email,
+            phone_number: phone,
+            password,
+            companyName,
+            website,
+            industry,
+            size,
+            address,
+            role,
+            linkedIn: linkedin
+        };
+
+        try {
+            await fetch("https://6879e7ebabb83744b7ea7104.mockapi.io/employers", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            window.location.href = "employer-login.html";
+        } catch (error) {
+            alert("Failed to register: " + error);
+        }
+    }
+</script>
+
+</body>
+</html>

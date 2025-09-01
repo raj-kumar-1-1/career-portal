@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styling/employer-landing.css">
+</head>
+<body>
+    <!-- <nav>
+        <div class="navBar">
+            <div>
+                <div><img src="../assets/logo.png" alt="logo"></div>
+                <p>Jobs</p>
+                <p>Companies</p>
+                <p>Services</p>
+
+            </div>
+            <div>
+                <button class="loginButton">Login</button>
+                <button class="registerButton"></button>
+                <select class="typeOfLogin">
+                    <option value="employee">For employers</option>
+                    <option value="employeer">Employer login</option>
+                </select>
+            </div>
+        </div>
+    </nav> -->
+    <nav>
+        <h1>Hire the Best Talent, Fast!</h1>
+    </nav>
+
+
+    <section>
+    <div id="subhead1">
+        <h3>Post jobs</h3>
+        <h3> track applications</h3>
+        <h3>Find top candidates in one place</h3>
+    </div>
+    <div id="buttons">
+        <button onclick=" postJob()" class="postJob">Post a Job</button>
+        <button class="manageHiring">Manage Hiring</button>
+        <button onclick="postedJob()" class="posted">Posted Jobs</button>
+    </div>
+        <h1 style="text-align: center; margin-top: 4rem; font-size: 5rem;">Why Choose Us?</h1>
+       
+                <ul style="margin-left: 20rem; font-size: 1.5rem; font-family:monospace;">
+                    <li>Fast & easy job posting</li>
+                    <li>Acess to large candidate pool</li>
+                    <li>Smart filters & applicant tracking</li>
+                </ul>
+            
+
+                <!-- <h1 style="text-align: left; margin-left: 4rem; margin-top: 4rem; font-size: 3rem;">How It Works</h1> -->
+                <div>
+                    <div>
+                        <img src="" alt="">
+                        <img src="" alt="">
+                    </div>
+                    <div>
+                        <img src="" alt="">
+                        <img src="" alt="">
+                    </div>
+
+                </div>
+                <div>
+                    <div>
+                        <img src="" alt="">
+                        <img src="" alt="">
+                    </div>
+                    <div>
+                        <img src="" alt="">
+                        <img src="" alt="">
+                    </div>
+
+                </div>
+                <h2 style="text-align: center;">80% of employers found a candidate within 10 days</h2>
+
+
+    </section>
+    <script>
+        console.log(localStorage.getItem("employerName"))
+        function postJob(){
+            window.location.href = "post-job.html";
+
+        }
+        function postedJob(){
+            window.location.href="posted-job.html";
+        }
+    </script>
+</body>
+</html>

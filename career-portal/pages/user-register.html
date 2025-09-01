@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styling/employer.css">
+    <!-- <script src="../scripts/user-login.js"></script> -->
+</head>
+<body>
+    <section>
+        <div class="logo">
+            <img src="../assets/logo.png">
+        </div>
+        <div class="login">
+            <h1 class="Title">Grab a Job</h1>
+            <form class="loginForm">
+                <h1>Register</h1>
+                <input type="text" placeholder="Name" class="inputs" id="name"><br>
+                <input type="text" placeholder="Username" class="inputs" id="empid"><br>
+                <input type="password" placeholder="password" class="inputs" id="emppas">
+                <input type="password" placeholder="confirm password" class="inputs" id="conpas">
+                <button type="button" onclick="register()" class="signInButton">Sign In</button>
+                <p>already have an account?<a href="user-login.html">Log in</a></p>
+
+            </form>
+
+        </div>
+    </section>
+    <script>
+        async function register() {
+        let inputs = document.querySelectorAll('input');
+        let name = inputs[0].value;
+        let username = inputs[1].value;
+        let password = inputs[2].value;
+        let confirmpassword = inputs[3].value;
+        
+      
+
+        if (password != confirmpassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        const data = {
+          username:username,
+          password:password,
+          name:name
+
+        };
+
+        try {
+            await fetch("https://6879e7ebabb83744b7ea7104.mockapi.io/users", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            window.location.href = "user-login.html";
+        } catch (error) {
+            alert("Failed to register: " + error);
+        }
+    }
+</script>
+</body>
+</html>
