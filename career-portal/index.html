@@ -10,7 +10,7 @@
  <nav>
         <div class="navBar">
             <div style="display: flex; ">
-                <div style="display: flex;justify-content: center; align-items: center; width:40%;object-fit: cover;" ><img class="logo" src="../assets/logo.png" alt="logo"></div>
+                <div style="display: flex;justify-content: center; align-items: center; width:40%;object-fit: cover;" ><img class="logo" src="./assets/logo.png" alt="logo"></div>
                 <div style="display: flex;justify-content: space-evenly;align-items: center; width:60%">
                 <p>Jobs</p>
                 <p>Companies</p>
@@ -60,19 +60,19 @@
     function login(){
         let val=String(document.getElementById("typeOfLogin").value);
         if(val==="employee"){
-        window.location.href = "user-login.html";
+        window.location.href = "pages/user-login.html";
         }
         else{
-            window.location.href="employer-login.html";
+            window.location.href="pages/employer-login.html";
         }
     }
     function register(){
                 let val=String(document.getElementById("typeOfLogin").value);
  if(val==="employee"){
-        window.location.href = "user-register.html";
+        window.location.href = "pages/user-register.html";
         }
         else{
-            window.location.href="employer-register.html";
+            window.location.href="pages/employer-register.html";
         }
     }
    </script> 
